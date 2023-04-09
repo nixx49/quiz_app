@@ -42,6 +42,8 @@ class _QuizPageState extends State<QuizPage> {
     'A slug\'s blood is green.',
   ];
 
+  List<bool> answerCheck = [false, true, true];
+
   int questionNumber = 0;
 
   @override
@@ -70,16 +72,6 @@ class _QuizPageState extends State<QuizPage> {
                     ],
                   )),
             ),
-            // questions[questionNumber],
-            // child: Text(
-            //   'This is where the question text will go.',
-            //   textAlign: TextAlign.center,
-            //   style: TextStyle(
-            //     fontSize: 25.0,
-            //     color: Colors.white,
-            //   ),
-            // ),
-            // ),
           ),
         ),
 
@@ -97,6 +89,13 @@ class _QuizPageState extends State<QuizPage> {
                   //   color: Colors.green,
                   // ));
                   questionNumber++;
+                  bool correctAnswer = answerCheck[questionNumber];
+
+                  if (correctAnswer == true) {
+                    print('your answer is correct');
+                  } else {
+                    print('your answer is wrong');
+                  }
                 });
               },
               child: const Text(
@@ -115,33 +114,17 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextButton(
               style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.orange)),
-              onPressed: () {
-                setState(() {
-                  questionNumber++;
-                });
-                //The user picked maybe.
-              },
-              child: const Text(
-                'Maybe',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
-          ),
-        ),
-
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-              style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.red)),
               onPressed: () {
                 setState(() {
                   questionNumber++;
+                  bool correctAnswer = answerCheck[questionNumber];
+
+                  if (correctAnswer == false) {
+                    print('your answer is correct');
+                  } else {
+                    print('your answer is wrong');
+                  }
                 });
                 //The user picked false.
               },
