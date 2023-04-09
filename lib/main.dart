@@ -30,27 +30,19 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [
-    const Icon(
-      Icons.check_circle_outline,
-      color: Colors.green,
-    ),
-    const Icon(
-      Icons.check_circle_outline,
-      color: Colors.red,
-    ),
-    const Icon(
-      Icons.check_circle_outline,
-      color: Colors.green,
-    ),
-    const Icon(
-      Icons.check_circle_outline,
-      color: Colors.red,
-    ),
-    const Icon(
-      Icons.check_circle_outline,
-      color: Colors.green,
-    ),
+    // const Icon(
+    //   Icons.check_circle_outline,
+    //   color: Colors.green,
+    // ),
   ];
+
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.',
+  ];
+
+  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -58,20 +50,36 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        const Expanded(
+        // questionDisplay(),
+        Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Center(
-              child: Text(
-                'This is where the question text will go.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
-                ),
-              ),
+              child: Text.rich(
+                  textAlign: TextAlign.center,
+                  TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: questions[questionNumber],
+                        style: const TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  )),
             ),
+            // questions[questionNumber],
+            // child: Text(
+            //   'This is where the question text will go.',
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //     fontSize: 25.0,
+            //     color: Colors.white,
+            //   ),
+            // ),
+            // ),
           ),
         ),
 
@@ -84,10 +92,11 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked true.
                 setState(() {
-                  scoreKeeper.add(const Icon(
-                    Icons.check_circle_outline,
-                    color: Colors.green,
-                  ));
+                  // scoreKeeper.add(const Icon(
+                  //   Icons.check_circle_outline,
+                  //   color: Colors.green,
+                  // ));
+                  questionNumber++;
                 });
               },
               child: const Text(
@@ -108,7 +117,10 @@ class _QuizPageState extends State<QuizPage> {
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.orange)),
               onPressed: () {
-                //The user picked false.
+                setState(() {
+                  questionNumber++;
+                });
+                //The user picked maybe.
               },
               child: const Text(
                 'Maybe',
@@ -128,6 +140,9 @@ class _QuizPageState extends State<QuizPage> {
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.red)),
               onPressed: () {
+                setState(() {
+                  questionNumber++;
+                });
                 //The user picked false.
               },
               child: const Text(
@@ -155,6 +170,16 @@ class _QuizPageState extends State<QuizPage> {
       ],
     );
   }
+
+//   questionDisplay() {
+//     Text.rich(TextSpan(
+//       children: <TextSpan>[
+//         TextSpan(
+//           text: questions[questionNumber], style: const TextStyle(fontSize: 25,color: Colors.white),
+//         ),
+//       ],
+//     ));
+//   }
 }
 
 /*
