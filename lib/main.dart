@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'questionbrain.dart';
+
+import 'package:quiz_app/questionbrain.dart';
 
 void main() => runApp(const Quizzler());
 
@@ -32,8 +33,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  int questionNumber = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,9 +50,9 @@ class _QuizPageState extends State<QuizPage> {
                   TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: QuestionBrain()
-                            .questionBank[questionNumber]
-                            .questionText,
+                        text: QuestionBrain().getQuestionText(),
+                        // .questionBank[questionNumber]
+                        // .questionText,
                         style: const TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -78,10 +77,9 @@ class _QuizPageState extends State<QuizPage> {
                   //   Icons.check_circle_outline,
                   //   color: Colors.green,
                   // ));
-                  questionNumber++;
-                  bool correctAnswer = QuestionBrain()
-                      .questionBank[questionNumber]
-                      .questionAnswer;
+                  QuestionBrain().nextQuestion();
+                  bool correctAnswer = QuestionBrain().getCorrectAnswer();
+                  // .questionAnswer;
 
                   if (correctAnswer == true) {
                     print('your answer is correct');
@@ -109,10 +107,8 @@ class _QuizPageState extends State<QuizPage> {
                   backgroundColor: MaterialStateProperty.all(Colors.red)),
               onPressed: () {
                 setState(() {
-                  questionNumber++;
-                  bool correctAnswer = QuestionBrain()
-                      .questionBank[questionNumber]
-                      .questionAnswer;
+                  QuestionBrain().nextQuestion();
+                  bool correctAnswer = QuestionBrain().getCorrectAnswer();
 
                   if (correctAnswer == false) {
                     print('your answer is correct');
