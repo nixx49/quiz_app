@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/quection.dart';
+import 'questionbrain.dart';
 
 void main() => runApp(const Quizzler());
 
@@ -30,29 +30,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [
-    // const Icon(
-    //   Icons.check_circle_outline,
-    //   color: Colors.green,
-    // ),
-  ];
-  // Question
-
-  // List<String> questions = [
-  //   'You can lead a cow down stairs but not up stairs.',
-  //   'Approximately one quarter of human bones are in the feet.',
-  //   'A slug\'s blood is green.',
-  // ];
-  //
-  // List<bool> answerCheck = [false, true, true];
-
-  List<Question> questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: false),
-  ];
+  List<Icon> scoreKeeper = [];
 
   int questionNumber = 0;
 
@@ -73,7 +51,9 @@ class _QuizPageState extends State<QuizPage> {
                   TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: questionBank[questionNumber].questionText,
+                        text: QuestionBrain()
+                            .questionBank[questionNumber]
+                            .questionText,
                         style: const TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -99,8 +79,9 @@ class _QuizPageState extends State<QuizPage> {
                   //   color: Colors.green,
                   // ));
                   questionNumber++;
-                  bool correctAnswer =
-                      questionBank[questionNumber].questionAnswer;
+                  bool correctAnswer = QuestionBrain()
+                      .questionBank[questionNumber]
+                      .questionAnswer;
 
                   if (correctAnswer == true) {
                     print('your answer is correct');
@@ -129,8 +110,9 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   questionNumber++;
-                  bool correctAnswer =
-                      questionBank[questionNumber].questionAnswer;
+                  bool correctAnswer = QuestionBrain()
+                      .questionBank[questionNumber]
+                      .questionAnswer;
 
                   if (correctAnswer == false) {
                     print('your answer is correct');
@@ -165,20 +147,4 @@ class _QuizPageState extends State<QuizPage> {
       ],
     );
   }
-
-//   questionDisplay() {
-//     Text.rich(TextSpan(
-//       children: <TextSpan>[
-//         TextSpan(
-//           text: questions[questionNumber], style: const TextStyle(fontSize: 25,color: Colors.white),
-//         ),
-//       ],
-//     ));
-//   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
