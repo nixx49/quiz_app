@@ -1,6 +1,6 @@
 class Question {
-  String questionText = '';
-  bool questionAnswer = false || true;
+  late String questionText;
+  late bool questionAnswer;
 
   Question({q, a}) {
     questionText = q;

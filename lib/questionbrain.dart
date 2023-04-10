@@ -3,7 +3,7 @@ import 'quection.dart';
 
 class QuestionBrain {
   int _questionNumber = 0;
-  final List<Question> _questionBank = [
+ final List<Question> _questionBank = [
     Question(q: 'Some cats are actually allergic to humans', a: true),
     Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
     Question(

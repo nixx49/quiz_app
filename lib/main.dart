@@ -33,6 +33,25 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = QuestionBrain().getCorrectAnswer();
+    setState(() {
+      if (userPickedAnswer == correctAnswer) {
+        scoreKeeper.add(const Icon(
+          Icons.check_circle_outline,
+          color: Colors.green,
+        ));
+      } else {
+        scoreKeeper.add(const Icon(
+          Icons.close_outlined,
+          color: Colors.red,
+        ));
+      }
+
+      QuestionBrain().nextQuestion();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,8 +70,6 @@ class _QuizPageState extends State<QuizPage> {
                     children: <TextSpan>[
                       TextSpan(
                         text: QuestionBrain().getQuestionText(),
-                        // .questionBank[questionNumber]
-                        // .questionText,
                         style: const TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -71,22 +88,7 @@ class _QuizPageState extends State<QuizPage> {
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.green)),
               onPressed: () {
-                //The user picked true.
-                setState(() {
-                  // scoreKeeper.add(const Icon(
-                  //   Icons.check_circle_outline,
-                  //   color: Colors.green,
-                  // ));
-                  QuestionBrain().nextQuestion();
-                  bool correctAnswer = QuestionBrain().getCorrectAnswer();
-                  // .questionAnswer;
-
-                  if (correctAnswer == true) {
-                    print('your answer is correct');
-                  } else {
-                    print('your answer is wrong');
-                  }
-                });
+                checkAnswer(true);
               },
               child: const Text(
                 'True',
@@ -106,16 +108,7 @@ class _QuizPageState extends State<QuizPage> {
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.red)),
               onPressed: () {
-                setState(() {
-                  QuestionBrain().nextQuestion();
-                  bool correctAnswer = QuestionBrain().getCorrectAnswer();
-
-                  if (correctAnswer == false) {
-                    print('your answer is correct');
-                  } else {
-                    print('your answer is wrong');
-                  }
-                });
+                checkAnswer(false);
                 //The user picked false.
               },
               child: const Text(
