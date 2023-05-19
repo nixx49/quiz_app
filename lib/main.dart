@@ -131,8 +131,6 @@ class _QuizPageState extends State<QuizPage> {
         const SizedBox(
           height: 20,
         ),
-
-        // Add a Row here as your score keeper
       ],
     );
   }
